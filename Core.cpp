@@ -24,10 +24,6 @@ const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
 const int FPS = 60;
 
-//Globals
-static SDL_Window *window = nullptr;
-static SDL_GLContext renderContext;
-
 //Initialization functions
 void input();
 void update();
