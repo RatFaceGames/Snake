@@ -58,11 +58,16 @@ void RenderingSystem::initGL() {
 	int status = glewInit();
 	if (status != GLEW_OK)
 		GLEWdie("Error: GLEW failed to initialize", status);
-
+	
 	//Initialize color buffer to black plane
+	
 	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	SDL_GL_SwapWindow(window);	//Swaps buffer into window. "draw"
+	
+}
+void RenderingSystem::loadShaders() {
+
 }
 
 void RenderingSystem::SDLdie(const char* msg) {

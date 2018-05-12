@@ -2,6 +2,11 @@
 	Program to play snake using OpenGL and SDL
 	Nicolas LaCognata
 	Ben Caldwell
+
+	TODO:
+		Learn how to draw a fucking triangle.
+			https://www.youtube.com/watch?v=Dyue3MzJDss&index=4&list=PLRwVmtr-pp06qT6ckboaOhnm9FxmzHpbY
+			https://learnopengl.com/Getting-started/Hello-Triangle
 */
 
 //Libraries
@@ -27,7 +32,7 @@ const int FPS = 60;
 //Initialization functions
 void input();
 void update();
-void draw();
+void draw(unsigned int vertexBuffer);
 
 int main(int argc, char *argv[]) {
 	//init();
@@ -39,31 +44,23 @@ int main(int argc, char *argv[]) {
 	glClear(GL_COLOR_BUFFER_BIT);
 	SDL_GL_SwapWindow(renderSystem.getWindow());
 	*/
-	draw();
-
 	//Loop control variables
 	SDL_Event input;
 	bool quit = false;
 	
-	Uint32 startClock = 0;
-	Uint32 deltaClock = 0;
-	Uint32 currentFPS = 0;
-
 	//Main loop
-	//TODO: Count and control frame rate.
 	while (!quit) {
 		while (SDL_PollEvent(&input) != 0) {
 			if (input.type == SDL_QUIT)
 				quit = true;
 		}
+		
 	}
 	//shutdown();
 	return 0;
 }
-void draw() { //TEMP FUNCTIONALITY, DRAW A SQUARE.
-	float vertMatrix[] = { 0.0f, 0.0f, 0.0f,
-		0.0f, 0.5f, 0.0f,
-		0.5f, 0.5f, 0.0f,
-		0.5f, 0.0f, 0.0f
-	};
+void draw(unsigned int vertexBuffer) { //TEMP FUNCTIONALITY, DRAW A TRIANGLE.
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glEnableVertexAttribArray(0);
 }

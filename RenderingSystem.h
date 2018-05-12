@@ -26,6 +26,7 @@ private:
 	void init();
 	void initSDL();
 	void initGL();
+	void loadShaders();
 
 	void SDLdie(const char* msg);
 	void GLEWdie(const char *msg, int status);
