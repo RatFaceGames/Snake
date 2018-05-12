@@ -48,9 +48,7 @@ int main(int argc, char *argv[]) {
 		}
 		frameEnd = SDL_GetTicks();
 	}
-
-	SDL_GL_DeleteContext(renderContext);
-	SDL_Quit();
+	shutdown();
 	return 0;
 }
 
@@ -104,4 +102,8 @@ void SDLdie(const char* msg) {
 	std::cerr << msg << " " << SDL_GetError();
 	SDL_Quit();
 	exit(EXIT_FAILURE);
+}
+void shutdown() {
+	SDL_GL_DeleteContext(renderContext);
+	SDL_Quit();
 }
