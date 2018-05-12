@@ -8,7 +8,7 @@
 #include <SDL_opengl.h>
 
 #include <string>
-class Renderer{
+class RenderingSystem{
 private:
 	int screenWidth;
 	int screenHeight;
@@ -17,10 +17,10 @@ private:
 	SDL_GLContext renderContext;
 
 public:
-	Renderer(std::string programName, int screenWidth, int screenHeight);
+	RenderingSystem(std::string programName, int screenWidth, int screenHeight);
 	SDL_Window *getWindow();
 	SDL_GLContext* getRenderingContext();
-	~Renderer();
+	~RenderingSystem();
 
 private:
 	void init();

@@ -15,7 +15,7 @@
 #include <string>
 
 //Classes
-#include "Renderer.h"
+#include "RenderingSystem.h"
 
 #define PROGRAM_NAME "SDL WITH OPENGL RENDERING CONTEXT"
 
@@ -31,13 +31,15 @@ void draw();
 
 int main(int argc, char *argv[]) {
 	//init();
-	Renderer renderSystem(PROGRAM_NAME, 512, 512);
+	RenderingSystem renderSystem(PROGRAM_NAME, 640, 480);
 
 	//Example of messing with window.
-	glClearColor(0, 0, 0, 1);
+	/*
+	glClearColor(0.5, 0, 0.5, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	SDL_GL_SwapWindow(renderSystem.getWindow());
-
+	*/
+	draw();
 
 	//Loop control variables
 	SDL_Event input;
@@ -57,4 +59,11 @@ int main(int argc, char *argv[]) {
 	}
 	//shutdown();
 	return 0;
+}
+void draw() { //TEMP FUNCTIONALITY, DRAW A SQUARE.
+	float vertMatrix[] = { 0.0f, 0.0f, 0.0f,
+		0.0f, 0.5f, 0.0f,
+		0.5f, 0.5f, 0.0f,
+		0.5f, 0.0f, 0.0f
+	};
 }

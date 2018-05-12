@@ -1,27 +1,27 @@
-#include "Renderer.h"
+#include "RenderingSystem.h"
 
 #include <iostream>
 #include <string>
 
-Renderer::Renderer(std::string programName, int screenWidth, int screenHeight){
+RenderingSystem::RenderingSystem(std::string programName, int screenWidth, int screenHeight){
 	this->screenWidth = screenWidth;
 	this->screenHeight = screenHeight;
 	this->programName = programName;
 	init();
 	return;
 }
-SDL_Window* Renderer::getWindow() {
+SDL_Window* RenderingSystem::getWindow() {
 	return window;
 }
-SDL_GLContext* Renderer::getRenderingContext() {
+SDL_GLContext* RenderingSystem::getRenderingContext() {
 	return &renderContext;
 }
-Renderer::~Renderer(){
+RenderingSystem::~RenderingSystem(){
 	SDL_GL_DeleteContext(renderContext);
 	SDL_Quit();
 }
 
-void Renderer::init() {
+void RenderingSystem::init() {
 	std::cout << "Renderer Initialized" << std::endl; 
 	initSDL();
 	initGL();
@@ -30,7 +30,7 @@ void Renderer::init() {
 	std::cout << "\tUsing OpenGL version: " << glGetString(GL_VERSION) << std::endl;
 }
 
-void Renderer::initSDL() {
+void RenderingSystem::initSDL() {
 	if (SDL_Init(SDL_INIT_VIDEO) < 0)
 		SDLdie("SDL failed to initialize");
 	//Version setup
@@ -54,22 +54,22 @@ void Renderer::initSDL() {
 	return;
 }
 
-void Renderer::initGL() {
+void RenderingSystem::initGL() {
 	int status = glewInit();
 	if (status != GLEW_OK)
 		GLEWdie("Error: GLEW failed to initialize", status);
 
 	//Initialize color buffer to black plane
-	glClearColor(1, 1, 1, 1);
+	glClearColor(0, 0, 0, 1);
 	glClear(GL_COLOR_BUFFER_BIT);
 	SDL_GL_SwapWindow(window);	//Swaps buffer into window. "draw"
 }
 
-void Renderer::SDLdie(const char* msg) {
+void RenderingSystem::SDLdie(const char* msg) {
 	std::cerr << msg << " " << SDL_GetError();
 	SDL_Quit();
 	exit(EXIT_FAILURE);
 }
-void Renderer::GLEWdie(const char *msg, int status) {
+void RenderingSystem::GLEWdie(const char *msg, int status) {
 	std::cerr << msg << " " << glewGetErrorString(status);
 }
