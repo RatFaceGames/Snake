@@ -20,14 +20,13 @@ public:
 	RenderingSystem(std::string programName, int screenWidth, int screenHeight);
 	SDL_Window *getWindow();
 	SDL_GLContext* getRenderingContext();
+	GLuint loadShaders(const char * vertex_file_path, const char * fragment_file_path);
 	~RenderingSystem();
 
 private:
 	void init();
 	void initSDL();
 	void initGL();
-	void loadShaders();
-
 	void SDLdie(const char* msg);
 	void GLEWdie(const char *msg, int status);
 
