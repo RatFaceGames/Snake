@@ -2,17 +2,15 @@
 	Program to play snake using OpenGL and SDL
 	Nicolas LaCognata
 	Ben Caldwell
-
+	Luke Biery 
+	
 	TODO:
-		Learn how to draw a fucking triangle.
-		GLEW isn't initializing right.
-			https://www.youtube.com/watch?v=Dyue3MzJDss&index=4&list=PLRwVmtr-pp06qT6ckboaOhnm9FxmzHpbY
-			https://learnopengl.com/Getting-started/Hello-Triangle
+		
 */
 
 //Libraries
 #include <SDL.h>
-#include <GL\glew.h>
+#include <GL/glew.h>
 
 
 //C++ headers
