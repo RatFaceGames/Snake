@@ -5,7 +5,8 @@
 	Luke Biery 
 	
 	TODO:
-		
+		Experiment with drawing
+		move vertecies based on keyboard input?
 */
 
 //Libraries
@@ -39,13 +40,19 @@ int main(int argc, char *argv[]) {
 	bool quit = false;
 	
 	//Sample triangle
-	float vertices[] = {
+	GLfloat vertices[] = {
 		-0.5f, -0.5f, 0.0f,
 		0.5f, -0.5f, 0.0f,
-		0.0f,  0.5f, 0.0f
+		0.5f,  0.5f, 0.0f,
+		-0.5f,  0.5f, 0.0f,
+	};
+	GLuint indices[]{
+		0, 1, 3,
+		1, 2, 3
 	};
 	GLuint VertexArrayObject; //VAO's hold one or more vertex buffers for a single object
 	GLuint VertexBufferObject; //VBO's are memory buffers fed to the GPU for processing. Can hold position data, color data, etc.
+	GLuint ElementBufferObject; //EBO's hold element information (vertex draw order)
 	
 	//Init VAO
 	glGenVertexArrays(1, &VertexArrayObject);
@@ -56,6 +63,14 @@ int main(int argc, char *argv[]) {
 	glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); //feed it vertex array
 	
+	//Init EBO
+	glGenBuffers(1, &ElementBufferObject);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ElementBufferObject);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GLfloat), (void*)0);
+	glEnableVertexAttribArray(0);
+
 	//Vertex shader shit
 	const char* vertexShaderSource =
 		"#version 430 core\n"
@@ -81,25 +96,11 @@ int main(int argc, char *argv[]) {
 			}
 				
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //Clear back buffer
-			glUseProgram(programID);
-			
-			
-			
-			
-
-			//Enable vertex array
-			glEnableVertexAttribArray(0);
-			//Ensure buffer bound
-			glBindBuffer(GL_ARRAY_BUFFER, VertexBufferObject);
-			//Set attribures
-			glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, (void*)0);
-			//draw
-			glDrawArrays(GL_TRIANGLES, 0, 3); // Starting from vertex 0; 3 vertices total -> 1 triangle
-			//Disable vertex array
-			glDisableVertexAttribArray(0);
-			
-			
-			
+			glUseProgram(programID); //Load shader program
+			glBindVertexArray(VertexArrayObject);
+			glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+			glBindVertexArray(0);
+					
 			SDL_GL_SwapWindow(renderSystem.getWindow()); //Swaps back buffer we drew on into window.
 		}
 		

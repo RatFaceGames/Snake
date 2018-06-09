@@ -1,6 +1,9 @@
 #pragma once
 /*
 	Sets up and provides handles to SDL and OpenGL contexts.
+	TODO: 
+		Abstract loadShaders
+		Load shaders from files
 */
 //Libraries
 #include <SDL.h>
